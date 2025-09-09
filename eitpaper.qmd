@@ -1,5 +1,5 @@
 ---
-title: "Public Transport & daily commute"
+title: "Do public transport (PT) services align with daily commuting patterns?"
 author: "Martin Haamer"
 format: html
 editor: visual
@@ -8,11 +8,21 @@ bibliography: references.bib
 
 # Introduction {#sec-intro}
 
-*To do:* *Overview of research goals*
+This paper provides a short insight into daily commuting data of Estonia and attempts to relate it to public transport data in GTFS data.
+
+The main research question is: Do the current public transport services in Estonia match the daily commuting patterns?
 
 # Literature Review
 
+Car traffic is bad for the environment and we want more people to travel using public transport [@poorthuis2023]
+
 # Data and Methodology {#sec-methods}
+
+An overview of the workflow is illustrated in @fig-mindmap.
+
+![Workflow](images/clipboard-1271000031.png){#fig-mindmap}
+
+<https://excalidraw.com/#json=LJu4JBwU35Qrxl-_oKJzp,zz1TjPKuGm65Dqppz8BASw>
 
 ### Data
 
@@ -57,11 +67,12 @@ cat("Number of commute routes:", nrow(commute_data_4326), "\n")
 cat("Total commute count:", sum(commute_data_4326$count), "\n")
 ```
 
+# Results {#sec-results}
 
 ```{r}
 #| label: interactive-commute-map
 #| echo: false
-#| fig-cap: "Interactive map of commute routes"
+#| fig-cap: "Figure 2. Interactive map of commute routes"
 
 # Create the interactive map
 commute_map <- leaflet(commute_data_4326) %>%
@@ -94,18 +105,8 @@ commute_map <- leaflet(commute_data_4326) %>%
 commute_map
 ```
 
-The overview of the workflow is illustrated in @fig-mindmap.
-
-![Figure 1. Mindmap](images/clipboard-1271000031.png){#fig-mindmap}
-
-<https://excalidraw.com/#json=LJu4JBwU35Qrxl-_oKJzp,zz1TjPKuGm65Dqppz8BASw>
-
-#Results {#sec-results}
-
 # Discussion {#sec-discussion}
 
 # Conclusion
-
-This document demonstrates various Quarto features including headings, formatted text, equations, code chunks, and error handling.
 
 # References
