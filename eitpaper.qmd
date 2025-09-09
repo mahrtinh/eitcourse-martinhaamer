@@ -1,0 +1,75 @@
+---
+title: "Public Transport & daily commute"
+author: "Martin Haamer"
+format: html
+editor: visual
+bibliography: references.bib
+---
+
+# Introduction {#sec-intro}
+
+*To do:* *Overview of research goals*
+
+# Literature Review
+
+# Methodology {#sec-methods}
+
+The overview of the workflow is illustrated in @fig-mindmap.
+
+![Figure 1. Mindmap](images/clipboard-1271000031.png){#fig-mindmap}
+
+<https://excalidraw.com/#json=LJu4JBwU35Qrxl-_oKJzp,zz1TjPKuGm65Dqppz8BASw>
+
+## Formatted Text Examples
+
+Examples of **bold text** and *italic text*. We can also combine them for ***bold and italic text***.
+
+You can also use: - `inline code` for small code snippets - ~~strikethrough text~~ - [links to websites](https://quarto.org)
+
+## Mathematical Equations
+
+Here's a simple inline equation: $E = mc^2$
+
+And here's a display equation:
+
+$$
+\sum_{i=1}^{n} x_i = \frac{n(n+1)}{2}
+$$
+
+## Code Chunks and Analysis
+
+Let's create some simple R code that produces output:
+
+```{r}
+#| label: basic-analysis
+#| echo: true
+
+# Create some sample data
+x <- c(1, 2, 3, 4, 5)
+y <- c(2, 4, 6, 8, 10)
+
+# Calculate mean and correlation
+mean_x <- mean(x)
+mean_y <- mean(y)
+correlation <- cor(x, y)
+
+print(paste("Mean of x:", mean_x))
+print(paste("Mean of y:", mean_y))
+print(paste("Correlation:", correlation))
+
+# Create a simple plot
+plot(x, y, main = "Simple Scatter Plot", 
+     xlab = "X values", ylab = "Y values", 
+     pch = 19, col = "blue")
+abline(lm(y ~ x), col = "red")
+```
+
+#Results {#sec-results}
+
+# Discussion {#sec-discussion}
+
+# Conclusion
+
+This document demonstrates various Quarto features including headings, formatted text, equations, code chunks, and error handling.
+
+# References
