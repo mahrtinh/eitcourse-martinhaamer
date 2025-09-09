@@ -14,7 +14,7 @@ bibliography: references.bib
 
 # Data and Methodology {#sec-methods}
 
-## Data 
+### Data
 
 Daily commute patterns in Estonia
 
@@ -23,6 +23,7 @@ Daily commute patterns in Estonia
 #| echo: false
 #| message: false
 #| warning: false
+#| output: false
 
 # Load required libraries
 library(sf)          # For reading spatial data
@@ -50,17 +51,16 @@ glimpse(commute_data_4326)
 
 # Summary statistics
 summary(commute_data_4326$count)
-summary(commute_data_4326$purposeid)
 
 # Check unique values
-cat("Unique purpose IDs:", unique(commute_data_4326$purposeid), "\n")
 cat("Number of commute routes:", nrow(commute_data_4326), "\n")
 cat("Total commute count:", sum(commute_data_4326$count), "\n")
 ```
 
+
 ```{r}
 #| label: interactive-commute-map
-#| echo: true
+#| echo: false
 #| fig-cap: "Interactive map of commute routes"
 
 # Create color palette based on commute count
@@ -110,113 +110,11 @@ commute_map <- leaflet(commute_data_4326) %>%
 commute_map
 ```
 
-```{r}
-#| label: commute-analysis
-#| echo: true
-
-# Analyze the commute patterns
-commute_summary <- commute_data_4326 %>%
-  st_drop_geometry() %>%  # Remove spatial component for analysis
-  group_by(purposeid) %>%
-  summarise(
-    total_routes = n(),
-    total_trips = sum(count),
-    avg_trips_per_route = round(mean(count), 2),
-    max_trips = max(count),
-    .groups = 'drop'
-  )
-
-print("Commute patterns by purpose:")
-print(commute_summary)
-```
-
-```{r}
-#| label: top-routes-map
-#| echo: true
-#| fig-cap: "Top 20 busiest commute routes"
-
-# Filter to show only the busiest routes
-top_routes <- commute_data_4326 %>%
-  arrange(desc(count)) %>%
-  slice_head(n = 20)
-
-# Create map of top routes
-top_routes_map <- leaflet(top_routes) %>%
-  addTiles() %>%
-  addPolylines(
-    color = "red",
-    weight = ~scales::rescale(count, to = c(2, 8)),
-    opacity = 0.9,
-    popup = ~paste(
-      "<strong>Top Route #", row_number(), "</strong><br/>",
-      "From:", start_kkood, "<br/>",
-      "To:", end_kkood, "<br/>",
-      "Count:", count, " trips"
-    )
-  ) %>%
-  setView(lng = 25.0, lat = 58.5, zoom = 8)
-
-top_routes_map
-```
-
-```{r}
-#| label: route-distribution
-#| echo: true
-#| fig-cap: "Distribution of trip counts"
-
-# Create histogram of trip counts
-library(ggplot2)
-
-ggplot(commute_data_4326, aes(x = count)) +
-  geom_histogram(bins = 30, fill = "steelblue", alpha = 0.7) +
-  labs(
-    title = "Distribution of Commute Trip Counts",
-    x = "Number of Trips",
-    y = "Number of Routes"
-  ) +
-  theme_minimal()
-```
-
 The overview of the workflow is illustrated in @fig-mindmap.
 
 ![Figure 1. Mindmap](images/clipboard-1271000031.png){#fig-mindmap}
 
 <https://excalidraw.com/#json=LJu4JBwU35Qrxl-_oKJzp,zz1TjPKuGm65Dqppz8BASw>
-
-## Formatted Text Examples
-
-Examples of **bold text** and *italic text*. We can also combine them for ***bold and italic text***.
-
-You can also use: - `inline code` for small code snippets - ~~strikethrough text~~ - [links to websites](https://quarto.org)
-
-
-## Code Chunks and Analysis
-
-Let's create some simple R code that produces output:
-
-```{r}
-#| label: basic-analysis
-#| echo: true
-
-# Create some sample data
-x <- c(1, 2, 3, 4, 5)
-y <- c(2, 4, 6, 8, 10)
-
-# Calculate mean and correlation
-mean_x <- mean(x)
-mean_y <- mean(y)
-correlation <- cor(x, y)
-
-print(paste("Mean of x:", mean_x))
-print(paste("Mean of y:", mean_y))
-print(paste("Correlation:", correlation))
-
-# Create a simple plot
-plot(x, y, main = "Simple Scatter Plot", 
-     xlab = "X values", ylab = "Y values", 
-     pch = 19, col = "blue")
-abline(lm(y ~ x), col = "red")
-```
 
 #Results {#sec-results}
 
